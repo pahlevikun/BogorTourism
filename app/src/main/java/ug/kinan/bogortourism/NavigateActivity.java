@@ -152,8 +152,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         sourcePosition = new LatLng(currLat, currLng);
 
         String url = getDirectionsUrl(sourcePosition, destPosition);
-        DownloadTask downloadTask = new DownloadTask();
-        downloadTask.execute(url);
+
 
 
         textViewJarak.setText(CalculationByDistance(sourcePosition, destPosition) + " KM");
@@ -187,6 +186,8 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_sejarah))
                     .title(namaAlias)).showInfoWindow();
         }
+        DownloadTask downloadTask = new DownloadTask();
+        downloadTask.execute(url);
     }
 
     protected synchronized void buildGoogleApiClient() {
