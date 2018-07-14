@@ -1,19 +1,21 @@
 package ug.kinan.bogortourism;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -79,7 +81,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
 
     }
 
-    public float CalculationByDistance(LatLng StartP, LatLng EndP) {
+    public double CalculationByDistance(LatLng StartP, LatLng EndP) {
         int Radius = 6371;// radius of earth in Km
         double lat1 = StartP.latitude;
         double lat2 = EndP.latitude;
@@ -99,14 +101,25 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         Float kmInDec = Float.valueOf(newFormat.format(km));
         double meter = valueResult % 1000;
         int meterInDec = Integer.valueOf(newFormat.format(meter));
+
         Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
                 + " Meter   " + meterInDec);
 
-        return kmInDec;
+        return round(meter / 100, 2);
     }
 
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
+
     public void onMapReady(GoogleMap googleMap) {
-        mGoogleMap=googleMap;
+        mGoogleMap = googleMap;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(NavigateActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -126,16 +139,16 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
 
         Intent ambil = getIntent();
-        currLat = ambil.getDoubleExtra("locLat",0);
-        currLng = ambil.getDoubleExtra("locLng",0);
+        currLat = ambil.getDoubleExtra("locLat", 0);
+        currLng = ambil.getDoubleExtra("locLng", 0);
         endLat = Double.parseDouble(ambil.getStringExtra("markerLat"));
         endLng = Double.parseDouble(ambil.getStringExtra("markerLng"));
         namaAlias = ambil.getStringExtra("markerNama");
         String tipe = ambil.getStringExtra("tipe");
 
-        Log.d("HASIL",currLat+","+currLng+"\n"+endLat+","+endLng);
+        Log.d("HASIL", currLat + "," + currLng + "\n" + endLat + "," + endLng);
 
-        destPosition = new LatLng(endLat,endLng);
+        destPosition = new LatLng(endLat, endLng);
         sourcePosition = new LatLng(currLat, currLng);
 
         String url = getDirectionsUrl(sourcePosition, destPosition);
@@ -143,10 +156,10 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         downloadTask.execute(url);
 
 
-        textViewJarak.setText(CalculationByDistance(sourcePosition,destPosition)+" KM");
+        textViewJarak.setText(CalculationByDistance(sourcePosition, destPosition) + " KM");
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sourcePosition, 14));
-        if (tipe.equals("1")){
+        if (tipe.equals("1")) {
             mGoogleMap.addMarker(new MarkerOptions()
                     .position(sourcePosition)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_kuliner))
@@ -155,7 +168,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
                     .position(destPosition)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_kuliner))
                     .title(namaAlias)).showInfoWindow();
-        }else if (tipe.equals("2")){
+        } else if (tipe.equals("2")) {
             mGoogleMap.addMarker(new MarkerOptions()
                     .position(sourcePosition)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_alam))
@@ -164,7 +177,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
                     .position(destPosition)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_alam))
                     .title(namaAlias)).showInfoWindow();
-        }else if (tipe.equals("3")){
+        } else if (tipe.equals("3")) {
             mGoogleMap.addMarker(new MarkerOptions()
                     .position(sourcePosition)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_sejarah))
@@ -215,25 +228,27 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {}
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
 
-    private String getDirectionsUrl(LatLng origin, LatLng dest){
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
         // Origin of route
-        String str_origin = "origin="+origin.latitude+","+origin.longitude;
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
         // Destination of route
-        String str_dest = "destination="+dest.latitude+","+dest.longitude;
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
         // Sensor enabled
         String sensor = "sensor=false";
         // Building the parameters to the web service
-        String parameters = str_origin+"&"+str_dest+"&"+sensor;
+        String parameters = str_origin + "&" + str_dest + "&" + sensor;
         // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
         return url;
     }
@@ -242,7 +257,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try{
+        try {
             URL url = new URL(strUrl);
 
             // Creating an http connection to communicate with url
@@ -259,7 +274,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
             StringBuffer sb = new StringBuffer();
 
             String line = "";
-            while( ( line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
 
@@ -267,9 +282,9 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
 
             br.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             //Log.d("Exception while downloading url", e.toString());
-        }finally{
+        } finally {
             iStream.close();
             urlConnection.disconnect();
         }
@@ -286,11 +301,11 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
             // For storing data from web service
             String data = "";
 
-            try{
+            try {
                 // Fetching the data from web service
                 data = downloadUrl(url[0]);
-            }catch(Exception e){
-                Log.d("Background Task",e.toString());
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
             }
             return data;
         }
@@ -308,8 +323,11 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         }
     }
 
-    /** A class to parse the Google Places in JSON format */
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> > {
+    /**
+     * A class to parse the Google Places in JSON format
+     */
+    @SuppressLint("StaticFieldLeak")
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
         // Parsing the data in non-ui thread
         @Override
@@ -318,13 +336,13 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
             JSONObject jObject;
             List<List<HashMap<String, String>>> routes = null;
 
-            try{
+            try {
                 jObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
 
                 // Starts parsing data
                 routes = parser.parse(jObject);
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return routes;
@@ -338,7 +356,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
             MarkerOptions markerOptions = new MarkerOptions();
 
             // Traversing through all the routes
-            for(int i=0;i<result.size();i++){
+            for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList<LatLng>();
                 lineOptions = new PolylineOptions();
 
@@ -346,8 +364,8 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
                 List<HashMap<String, String>> path = result.get(i);
 
                 // Fetching all the points in i-th route
-                for(int j=0;j<path.size();j++){
-                    HashMap<String,String> point = path.get(j);
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
 
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
@@ -362,8 +380,12 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
                 lineOptions.color(getResources().getColor(R.color.colorPrimary));
             }
 
-            // Drawing polyline in the Google Map for the i-th route
-            mGoogleMap.addPolyline(lineOptions);
+            try {
+                // Drawing polyline in the Google Map for the i-th route
+                mGoogleMap.addPolyline(lineOptions);
+            } catch (Exception e) {
+                Toast.makeText(NavigateActivity.this, "Can't make navigation!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -371,7 +393,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id==android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
             return true;
         }
