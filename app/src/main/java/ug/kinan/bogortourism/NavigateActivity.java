@@ -105,7 +105,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
                 + " Meter   " + meterInDec);
 
-        return round(meter / 100, 2);
+        return round(meter, 2);
     }
 
     public static double round(double value, int places) {

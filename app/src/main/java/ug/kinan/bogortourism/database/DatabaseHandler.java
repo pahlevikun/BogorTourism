@@ -8,9 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import ug.kinan.bogortourism.R;
 import ug.kinan.bogortourism.pojo.Data;
 
 /**
@@ -19,7 +17,7 @@ import ug.kinan.bogortourism.pojo.Data;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Versi Database
-    public static final int DATABASE_VERSION = 9;
+    public static final int DATABASE_VERSION = 11;
 
     // Nama Database
     public static final String DATABASE_NAME = "bogortourism";
@@ -51,7 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Creating Tables
     @Override
-        public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE_WISATA = "CREATE TABLE " + TABLE_WISATA + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_JUDUL + " TEXT,"
                 + KEY_ALAMAT + " TEXT," + KEY_HARGA + " TEXT," + KEY_OPERASIONAL + " TEXT,"
@@ -60,7 +58,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_TABLE_KULINER = "CREATE TABLE " + TABLE_KULINER + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_JUDUL + " TEXT,"
                 + KEY_ALAMAT + " TEXT," + KEY_HARGA + " TEXT," + KEY_OPERASIONAL + " TEXT,"
-                + KEY_DESKRIPSI + " TEXT,"  + KEY_LAT + " TEXT," + KEY_LNG + " TEXT,"
+                + KEY_DESKRIPSI + " TEXT," + KEY_LAT + " TEXT," + KEY_LNG + " TEXT,"
                 + KEY_FOTO + " TEXT," + KEY_FOTO_2 + " TEXT," + KEY_TIPE + " TEXT" + ")";
         String CREATE_TABLE_SEJARAH = "CREATE TABLE " + TABLE_SEJARAH + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_JUDUL + " TEXT,"
@@ -78,7 +76,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public void insertKuliner(SQLiteDatabase db){
+    public void insertKuliner(SQLiteDatabase db) {
         ContentValues value = new ContentValues();
         //Record 1
         value.put(KEY_JUDUL, "Roti Unyil Venus");
@@ -89,7 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.619150");
         value.put(KEY_LNG, "106.816313");
         value.put(KEY_FOTO, "kuliner1");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner21");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 2
@@ -101,7 +99,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.616062");
         value.put(KEY_LNG, "106.814216");
         value.put(KEY_FOTO, "kuliner2");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner22");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 3
@@ -113,7 +111,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.617481");
         value.put(KEY_LNG, "106.81191");
         value.put(KEY_FOTO, "kuliner3");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner23");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 4
@@ -125,7 +123,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.590302");
         value.put(KEY_LNG, "106.802581");
         value.put(KEY_FOTO, "kuliner4");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner24");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 5
@@ -137,133 +135,109 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.588912");
         value.put(KEY_LNG, "106.802658");
         value.put(KEY_FOTO, "kuliner5");
-        value.put(KEY_FOTO_2, "kuliner1");
-        value.put(KEY_TIPE, "1");
-        db.insert(TABLE_KULINER, null, value);
-        //Record 6
-        value.put(KEY_JUDUL, "Priangan Sari");
-        value.put(KEY_ALAMAT, "Jl. Raya Puncak, Cianjur no.53, Gadog, Megamendung, Bogor, Jawa Barat. 16770.");
-        value.put(KEY_HARGA, "-");
-        value.put(KEY_OPERASIONAL, "07.00-21.00 WIB");
-        value.put(KEY_DESKRIPSI, "-");
-        value.put(KEY_LAT, "-6.653837");
-        value.put(KEY_LNG, "106.866492");
-        value.put(KEY_FOTO, "kuliner6");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner25");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 7
         value.put(KEY_JUDUL, "Sari Pakuan");
         value.put(KEY_ALAMAT, "Jl Raya Padjajaran no.72B, Pakuan, Bogor Selatan. Kota Bogor, Jawa Barat. 16132.");
-        value.put(KEY_HARGA, "-");
+        value.put(KEY_HARGA, "Rp. 28.000 - Rp.35.000");
         value.put(KEY_OPERASIONAL, "06.00-22.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.603165");
         value.put(KEY_LNG, "106.806361");
         value.put(KEY_FOTO, "kuliner7");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner27");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 8
         value.put(KEY_JUDUL, "Miss Pumpkin");
         value.put(KEY_ALAMAT, "Jl. Raya Pajajaran no.84, Baranangsiang, Bogor Timur, Kota Bogor, Jawa Barat. 16143.");
-        value.put(KEY_HARGA, "-");
+        value.put(KEY_HARGA, "Rp. 15.000 - Rp.40.000");
         value.put(KEY_OPERASIONAL, "08.00-18.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.608469");
         value.put(KEY_LNG, "106.810695");
         value.put(KEY_FOTO, "kuliner8");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner28");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 9
         value.put(KEY_JUDUL, "Bogor Princess Cake");
         value.put(KEY_ALAMAT, "Komplek Ahmad Yani no.44, Tanah Sareal, Kota Bogor, Jawa Barat. 16161.");
-        value.put(KEY_HARGA, "-");
+        value.put(KEY_HARGA, "Rp. 60.000 - Rp. 85.000");
         value.put(KEY_OPERASIONAL, "07.00-22.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.576463");
         value.put(KEY_LNG, "106.799947");
         value.put(KEY_FOTO, "kuliner9");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner29");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 10
         value.put(KEY_JUDUL, "Sentra Oleh-Oleh Kita");
         value.put(KEY_ALAMAT, "Ruko Tiara no.3A. Jl. Raya Padjajaran, Tegallega, Bogor Tengah, Kota Bogor, Jawa Barat. 16142.");
-        value.put(KEY_HARGA, "-");
+        value.put(KEY_HARGA, "Rp. 10.000 - Rp. 55.000");
         value.put(KEY_OPERASIONAL, "06.00-22.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.603165");
         value.put(KEY_LNG, "106.806361");
         value.put(KEY_FOTO, "kuliner10");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner210");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 11
         value.put(KEY_JUDUL, "Bogor Raincake");
         value.put(KEY_ALAMAT, "Jl. Raya Pajajaran no.31, Babakan, Bogor Tengh, Kota Bogor, Jawa Barat. 16128.");
-        value.put(KEY_HARGA, "Rp 1.500 - Rp21.500");
+        value.put(KEY_HARGA, "Rp. 65.000 - Rp. 70.000");
         value.put(KEY_OPERASIONAL, "06.00-22.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.593827");
         value.put(KEY_LNG, "106.804974");
         value.put(KEY_FOTO, "kuliner11");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner211");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 12
         value.put(KEY_JUDUL, "Cake Ala Ali");
         value.put(KEY_ALAMAT, "Jl. RE.Martadinata no.8, Sempur, Bogor Tengah, Kota Bogor, Jawa Barat. 16129.");
-        value.put(KEY_HARGA, "-");
+        value.put(KEY_HARGA, "Rp. 40.000 - Rp. 70.000");
         value.put(KEY_OPERASIONAL, "07.00-22.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.581249");
         value.put(KEY_LNG, "106.795133");
         value.put(KEY_FOTO, "kuliner12");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner212");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 13
         value.put(KEY_JUDUL, "Strudel Bogor");
         value.put(KEY_ALAMAT, "Jl. Raya Pajajaran no.3f, Baranangsiang, Bogor Timur, Kota Bogor, Jawa Barat. 16143.");
-        value.put(KEY_HARGA, "Rp 1.500 - Rp21.500");
+        value.put(KEY_HARGA, "Rp 50.000");
         value.put(KEY_OPERASIONAL, "08.00-22.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.603172");
         value.put(KEY_LNG, "106.805791");
         value.put(KEY_FOTO, "kuliner13");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner213");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
         //Record 14
         value.put(KEY_JUDUL, "Asinan Dewi Sri");
         value.put(KEY_ALAMAT, "Jl. Raya Pajajaran no.60A, Baranangsiang, Bogor Timur, Kota Bogor, Jawa Barat. 16143.");
-        value.put(KEY_HARGA, "Rp 1.500 - Rp21.500");
+        value.put(KEY_HARGA, "Rp 15.000 - Rp. 25.000");
         value.put(KEY_OPERASIONAL, "09.00-21.00 WIB");
         value.put(KEY_DESKRIPSI, "-");
         value.put(KEY_LAT, "-6.610503");
         value.put(KEY_LNG, "106.811515");
         value.put(KEY_FOTO, "kuliner14");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "kuliner214");
         value.put(KEY_TIPE, "1");
         db.insert(TABLE_KULINER, null, value);
     }
 
-    public void insertWisata(SQLiteDatabase db){
+    private void insertWisata(SQLiteDatabase db) {
         ContentValues value = new ContentValues();
-        //Record 1
-        value.put(KEY_JUDUL, "Kawah Ratu Taman Nasional Gunung Halimun Salak");
-        value.put(KEY_ALAMAT, "Gunung Sari, Pamijahan, Bogor, Jawa Barat 16810.");
-        value.put(KEY_HARGA, "Rp 10.000,00/orang");
-        value.put(KEY_OPERASIONAL, "08.00 – 14.00 WIB");
-        value.put(KEY_DESKRIPSI, "Kawah Ratu merupakan tempat menarik yang bisa dikunjungi oleh para pecinta wisata alam. Yang menjadikan kawah ini berbeda dengan kawah-kawah lain adalah keberedaan aliran sungai Cikuluwung sepanjang 1 km. Hal tersebut yang menjadi daya tarik tersendiri dari kawah ini. Dilihat dari kejauhan, air sungai tersebut terlihat berwarna biru toska. Namun, saat kita mendekat, akan ada warna kuning di dasar sungai yang terlihat dengan jelas. Warna kuning tersebut adalah endapan belerang.");
-        value.put(KEY_LAT, "-6.717561");
-        value.put(KEY_LNG, "106.713162");
-        value.put(KEY_FOTO, "wisata1");
-        value.put(KEY_FOTO_2, "kuliner1");
-        value.put(KEY_TIPE, "2");
-        db.insert(TABLE_WISATA, null, value);
         //Record
         value.put(KEY_JUDUL, "Gunung Kapur Klapanunggal");
         value.put(KEY_ALAMAT, "Klapanunggal, Klp. Nunggal, Bogor, Jawa Barat 16710.");
@@ -273,7 +247,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.457890");
         value.put(KEY_LNG, "106.953761");
         value.put(KEY_FOTO, "wisata2");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata22");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -285,7 +259,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.718049");
         value.put(KEY_LNG, "106.768619");
         value.put(KEY_FOTO, "wisata3");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata23");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -297,7 +271,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.702325");
         value.put(KEY_LNG, "106.996766");
         value.put(KEY_FOTO, "wisata4");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata24");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -309,7 +283,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.604170");
         value.put(KEY_LNG, "107.051912");
         value.put(KEY_FOTO, "wisata5");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata25");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -321,19 +295,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.711593");
         value.put(KEY_LNG, "106.770227");
         value.put(KEY_FOTO, "wisata6");
-        value.put(KEY_FOTO_2, "kuliner1");
-        value.put(KEY_TIPE, "2");
-        db.insert(TABLE_WISATA, null, value);
-        //Record
-        value.put(KEY_JUDUL, "Alun-Alun Surya Kencana");
-        value.put(KEY_ALAMAT, "TNGGP Cibodas, Sukamulya, Cugenang, Jawa Barat");
-        value.put(KEY_HARGA, "Rp 27.500,00/orang");
-        value.put(KEY_OPERASIONAL, "-");
-        value.put(KEY_DESKRIPSI, "Alun-alun Surya Kencana berada di atas ketinggian 2.750 meter di atas permukaan laut, di kawasan Taman Nasional Gunung Gede Pangrango yang terdapat di tiga kabupaten, yaitu Cianjur, Sukabumi, dan Bogor. Untuk sampai ke tempat ini, para pendaki harus menempuh perjalanan tracking selama 7 hingga 8 jam via jalur Cibodas atau Gunung Putri. Disini, pengunjung bisa menikmati padang savanna yang terhampar  luas menjadi latar tanaman yang hanya tumbuh di ketinggian, yaitu bunga edelweiss.");
-        value.put(KEY_LAT, "-6.777255");
-        value.put(KEY_LNG, "106.981042");
-        value.put(KEY_FOTO, "wisata7");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata26");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -345,7 +307,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.453445");
         value.put(KEY_LNG, "106.594624");
         value.put(KEY_FOTO, "wisata8");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata28");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -357,7 +319,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.431591");
         value.put(KEY_LNG, "106.696006");
         value.put(KEY_FOTO, "wisata9");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata29");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -369,7 +331,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.554420");
         value.put(KEY_LNG, "106.750233");
         value.put(KEY_FOTO, "wisata10");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata210");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -381,7 +343,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.703019");
         value.put(KEY_LNG, "106.971692");
         value.put(KEY_FOTO, "wisata11");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata211");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -393,19 +355,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.602151");
         value.put(KEY_LNG, "106.798475");
         value.put(KEY_FOTO, "wisata12");
-        value.put(KEY_FOTO_2, "kuliner1");
-        value.put(KEY_TIPE, "2");
-        db.insert(TABLE_WISATA, null, value);
-        //Record
-        value.put(KEY_JUDUL, "Kebun Raya Cibodas");
-        value.put(KEY_ALAMAT, "Kompleks Hutan Gunung Gede Pangrango, Desa Cimacan, Cipanas, Cianjur, Jawa Barat.");
-        value.put(KEY_HARGA, "Rp 9.500/orang");
-        value.put(KEY_OPERASIONAL, "08.00-17.00 WIB");
-        value.put(KEY_DESKRIPSI, "Kebun Raya Cibodas adalah taman hijau yang luasnya hampir 80 hektar dengan topografi lapangan yang bergelombang dan berbukit-bukit menjadikan kebun raya cibodas salah satu tujuan wisata utama di kawasan Cibodas. Keindahan Kebun Raya Cibodas sudah terkenal sejak lama dan menjadi tujuan wisata domestik maupun mancanegara. Kebu ini tepat berada di kaki gunung Gede Pangrango dengan ketinggian 1.275 mdpl dan bersuhu udara 17 – 27 derajat Celcius. ");
-        value.put(KEY_LAT, "-6.736591");
-        value.put(KEY_LNG, "107.008046");
-        value.put(KEY_FOTO, "wisata13");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata212");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -417,7 +367,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.453087");
         value.put(KEY_LNG, "106.636929");
         value.put(KEY_FOTO, "wisata14");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata214");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
         //Record
@@ -429,12 +379,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.580710");
         value.put(KEY_LNG, "106.903576");
         value.put(KEY_FOTO, "wisata15");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "wisata215");
         value.put(KEY_TIPE, "2");
         db.insert(TABLE_WISATA, null, value);
     }
 
-    public void insertSejarah(SQLiteDatabase db){
+    public void insertSejarah(SQLiteDatabase db) {
         ContentValues value = new ContentValues();
         //Record 1
         value.put(KEY_JUDUL, "Prasasti Batutulis");
@@ -445,7 +395,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.623768");
         value.put(KEY_LNG, "106.809035");
         value.put(KEY_FOTO, "sejarah1");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah21");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -457,7 +407,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.603581");
         value.put(KEY_LNG, "106.796926");
         value.put(KEY_FOTO, "sejarah2");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah22");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -469,7 +419,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.585989");
         value.put(KEY_LNG, "106.796253");
         value.put(KEY_FOTO, "sejarah3");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah23");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -481,7 +431,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.594255");
         value.put(KEY_LNG, "106.788588");
         value.put(KEY_FOTO, "sejarah4");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah24");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -493,7 +443,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.598566");
         value.put(KEY_LNG, "106.794098");
         value.put(KEY_FOTO, "sejarah5");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah25");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -505,7 +455,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.597888");
         value.put(KEY_LNG, "106.635036");
         value.put(KEY_FOTO, "sejarah6");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah26");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -517,19 +467,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.630670");
         value.put(KEY_LNG, "106.761564");
         value.put(KEY_FOTO, "sejarah7");
-        value.put(KEY_FOTO_2, "kuliner1");
-        value.put(KEY_TIPE, "3");
-        db.insert(TABLE_SEJARAH, null, value);
-        //Record
-        value.put(KEY_JUDUL, "Situs Gunung Padang");
-        value.put(KEY_ALAMAT, "Jl. Alternatif Cibubur, Karyamukti, Campaka, Kabupaten Cianjur, Jawa Barat 43215.");
-        value.put(KEY_HARGA, "Rp 3.000/orang");
-        value.put(KEY_OPERASIONAL, "09.00-17.00 WIB");
-        value.put(KEY_DESKRIPSI, "Situs Gunung Padang merupakan situs peninggalan kebudayaan Megalitikum di Jawa Barat. Luas kompleks utamanya kurang lebih 900 m2, terletak pada ketinggian 885 mdpl, dan area situs ini sekitar 3 hektar, menjadikannya sebagai kompleks situs berundak terbesar di Asia Tenggara. Lokasi situs berbukit-bukit dan sulit dijangkau. Kompleksnya memanjang, menutupi permukaan sebuah bukit yang dibatasi olej jejeran batu andesit besar berbentuk persegi. Situs ini dikelilingi oleh lembah-lembah yang sangat dalam. Tempat ini sebelumnya memang telah dikeramatkan oleh warga setempat. Penduduk sekitar menganggapnya sebagai tempat Prabu Siliwangi, raja Sunda, berusaha membangun istana dalam semalam.");
-        value.put(KEY_LAT, "-6.993643");
-        value.put(KEY_LNG, "107.056315");
-        value.put(KEY_FOTO, "sejarah8");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah27");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
         //Record
@@ -541,7 +479,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         value.put(KEY_LAT, "-6.601476");
         value.put(KEY_LNG, "106.805095");
         value.put(KEY_FOTO, "sejarah9");
-        value.put(KEY_FOTO_2, "kuliner1");
+        value.put(KEY_FOTO_2, "sejarah29");
         value.put(KEY_TIPE, "3");
         db.insert(TABLE_SEJARAH, null, value);
     }

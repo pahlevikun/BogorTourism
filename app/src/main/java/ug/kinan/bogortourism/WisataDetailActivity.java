@@ -1,9 +1,8 @@
 package ug.kinan.bogortourism;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,7 +23,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -35,7 +33,7 @@ public class WisataDetailActivity extends AppCompatActivity implements OnMapRead
 
     private GoogleMap mGoogleMap;
     private String namaLokasi, alamatLokasi, hargaLokasi, operasionalLokasi, deskripsiLokasi,
-            latLokasi, lngLokasi, tipeLokasi, fotoLokasi,fotoLokasi2;
+            latLokasi, lngLokasi, tipeLokasi, fotoLokasi, fotoLokasi2;
     private Button btNavigasi;
     private ImageView ivGambar;
     private TextView tvNama, tvJam, tvKeterangan, tvInfo;
@@ -83,17 +81,17 @@ public class WisataDetailActivity extends AppCompatActivity implements OnMapRead
         tvInfo.setText("Alamat Lokasi : " + alamatLokasi + "\nBiaya/Rentang Harga : " + hargaLokasi);
         tvKeterangan.setText(deskripsiLokasi);
 
-        Log.d("HASIL", fotoLokasi2+ " " + fotoLokasi + " " + getResources().getIdentifier(fotoLokasi, "drawable", getPackageName()));
+        Log.d("HASIL", fotoLokasi2 + " " + fotoLokasi + " " + getResources().getIdentifier(fotoLokasi, "drawable", getPackageName()));
         ivGambar.setImageResource(getResources().getIdentifier(fotoLokasi, "drawable", getPackageName()));
-        ivGambar.setVisibility(View.GONE);
+        ivGambar.setVisibility(View.VISIBLE);
         if (deskripsiLokasi.length() < 5) {
             cardViewInfo.setVisibility(View.GONE);
         }
 
-        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put(namaLokasi+"1",getResources().getIdentifier(fotoLokasi, "drawable", getPackageName()));
-        file_maps.put(namaLokasi+"2",getResources().getIdentifier(fotoLokasi2, "drawable", getPackageName()));
-        for(String name : file_maps.keySet()){
+        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+        file_maps.put(namaLokasi + "1", getResources().getIdentifier(fotoLokasi, "drawable", getPackageName()));
+        file_maps.put(namaLokasi + "2", getResources().getIdentifier(fotoLokasi2, "drawable", getPackageName()));
+        for (String name : file_maps.keySet()) {
             DefaultSliderView defaultSliderView = new DefaultSliderView(WisataDetailActivity.this);
             defaultSliderView
                     .description(name)
@@ -105,6 +103,8 @@ public class WisataDetailActivity extends AppCompatActivity implements OnMapRead
         sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderShow.setCustomAnimation(new DescriptionAnimation());
         sliderShow.setDuration(5000);
+
+        sliderShow.setVisibility(View.GONE);
 
         GPSTracker gps = new GPSTracker(WisataDetailActivity.this);
         final Double locLat = gps.getLatitude();

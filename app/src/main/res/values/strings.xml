@@ -25,6 +25,9 @@
         \n\nSetelah Anda memilih tempat wisata yang ingin dituju, halaman selanjutnya akan menampilkan gambar-gambar serta informasi tentang peta menuju tempat tersebut, harga, jam operasional, dan deskripsi tempat wisata.
         \n\nGunakanlah peta yang tersedia untuk mencapai tempat wisata yang akan dituju.
         \n\nUntuk mengetahui berita-berita yang sedang terjadi di Bogor, Anda dapat menekan button berita pada halaman awal, karena aplikasi sudah terhubung dengan twitter pemkotbogor.
+        \n\nMarker oren pada tampilan peta digunakan untuk menunjukan Wisata Alam
+        \nMarker hijau pada tampilan peta digunakan untuk menunjukan Wisata Sejarah
+        \nMarker biru pada tampilan peta digunakan untuk menunjukan Oleh-oleh khas Bogor
 
     </string>
 
